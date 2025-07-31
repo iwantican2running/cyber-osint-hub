@@ -1,34 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OSINT Dashboard</title>
+    <title>OSINT Cyber Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
+
 <body>
-    <div id="dashboard-container">
-        <h1>OSINT Dashboard</h1>
-        <div class="terminal">
-            <pre>
-$ osint scan --target example.com
-[INFO] Scanning for open ports...
-[INFO] Port 80 open
-[INFO] Port 443 open
-            </pre>
-        </div>
-        <div class="data-graph">
-            <h2>Data Graph</h2>
-            <div class="graph-bar" style="height: 70%;"></div>
-            <div class="graph-bar" style="height: 50%;"></div>
-            <div class="graph-bar" style="height: 30%;"></div>
-        </div>
-        <div class="data-packets">
-            <div class="packet"></div>
-            <div class="packet"></div>
-            <div class="packet"></div>
-        </div>
+    <div id="cyber-dashboard">
+        <header>
+            <h1>OSINT Cyber Dashboard</h1>
+        </header>
+
+        <section id="terminal">
+            <h2>Simulated Terminal</h2>
+            <div class="terminal-output">
+                <p>$> Fetching OSINT Data...</p>
+                <p>$> Data retrieved successfully!</p>
+                <p>$> Analyzing data...</p>
+                <p>$> Analysis complete. Visualizing results...</p>
+            </div>
+        </section>
+
+        <section id="data-visualization">
+            <h2>Dynamic Data Visualizations</h2>
+            <div class="chart">
+                <div class="bar" style="height: 70%; animation-delay: 0s;"></div>
+                <div class="bar" style="height: 50%; animation-delay: 0.1s;"></div>
+                <div class="bar" style="height: 90%; animation-delay: 0.2s;"></div>
+                <div class="bar" style="height: 30%; animation-delay: 0.3s;"></div>
+                <div class="bar" style="height: 80%; animation-delay: 0.4s;"></div>
+            </div>
+        </section>
+
+        <section id="network-map">
+            <h2>Network Map</h2>
+            <div class="network-node" style="top: 20%; left: 20%;"></div>
+            <div class="network-node" style="top: 50%; left: 30%;"></div>
+            <div class="network-node" style="top: 70%; left: 70%;"></div>
+            <div class="network-connection" style="top: 22%; left: 22%; transform: rotate(45deg);"></div>
+            <div class="network-connection" style="top: 52%; left: 32%; transform: rotate(90deg);"></div>
+        </section>
+
+        <section id="encryption">
+            <h2>Encryption/Decryption Effects</h2>
+            <div class="encryption-effect">
+                <p>Encrypting...</p>
+                <div class="cipher-text">1234-ABCD-5678-EFGH</div>
+                <p>Decrypting...</p>
+                <div class="plain-text">Open Source Intelligence</div>
+            </div>
+        </section>
     </div>
 </body>
+
 </html>
