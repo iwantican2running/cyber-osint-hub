@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSINT Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div id="dashboard-container">
+        <h1>OSINT Dashboard</h1>
+        <div class="terminal">
+            <pre>
+$ osint scan --target example.com
+[INFO] Scanning for open ports...
+[INFO] Port 80 open
+[INFO] Port 443 open
+            </pre>
+        </div>
+        <div class="data-graph">
+            <h2>Data Graph</h2>
+            <div class="graph-bar" style="height: 70%;"></div>
+            <div class="graph-bar" style="height: 50%;"></div>
+            <div class="graph-bar" style="height: 30%;"></div>
+        </div>
+        <div class="data-packets">
+            <div class="packet"></div>
+            <div class="packet"></div>
+            <div class="packet"></div>
+        </div>
+    </div>
+</body>
+</html>
