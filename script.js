@@ -1,25 +1,59 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const output = document.getElementById('terminal-output');
-    const dashboard = document.getElementById('dashboard-container');
+// Terminal Simulator for OSINT Web Project
+const terminalOutput = document.getElementById('terminal-output');
+const cursor = document.createElement('span');
+cursor.innerText = '|';
+cursor.className = 'cursor';
+terminalOutput.appendChild(cursor);
 
-    // Simulate terminal output
-    const messages = [
-        'Scanning for vulnerabilities...',
-        'Collecting data from public sources...',
-        'Analysis complete. Found 5 potential threats.'
-    ];
-    
-    let index = 0;
-    function displayMessage() {
-        if (index < messages.length) {
-            output.textContent += messages[index] + '\n';
-            index++;
-            setTimeout(displayMessage, 2000);
-        }
+const commands = [
+    "Scanning network...",
+    "Collecting data...",
+    "Analyzing patterns...",
+    "Generating report...",
+    "Scan completed successfully!"
+];
+
+let commandIndex = 0;
+
+function typeCommand() {
+    if (commandIndex < commands.length) {
+        const command = commands[commandIndex];
+        let charIndex = 0;
+
+        const typingInterval = setInterval(() => {
+            if (charIndex < command.length) {
+                terminalOutput.innerHTML += command.charAt(charIndex);
+                charIndex++;
+            } else {
+                clearInterval(typingInterval);
+                setTimeout(() => {
+                    terminalOutput.innerHTML += '<br>';
+                    commandIndex++;
+                    typeCommand();
+                }, 1000);
+            }
+        }, 100);
+    } else {
+        cursor.style.display = 'none';
     }
-    
-    dashboard.addEventListener('click', () => {
-        output.textContent = 'Initializing OSINT tools...\n';
-        displayMessage();
-    });
-});
+}
+
+function updateDashboard() {
+    const dataElement = document.getElementById('data-visualization');
+    dataElement.innerHTML = Math.floor(Math.random() * 100) + '% of data processed';
+}
+
+setInterval(updateDashboard, 2000);
+typeCommand();
+
+// CSS for blinking cursor
+const style = document.createElement('style');
+style.innerHTML = `
+    .cursor {
+        animation: blink 1s step-end infinite;
+    }
+    @keyframes blink {
+        50% { opacity: 0; }
+    }
+`;
+document.head.appendChild(style);
