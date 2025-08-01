@@ -1,59 +1,49 @@
-// Terminal Simulator for OSINT Web Project
-const terminalOutput = document.getElementById('terminal-output');
+// Terminal-like output simulation
+const terminalOutput = document.getElementById('terminal');
 const cursor = document.createElement('span');
-cursor.innerText = '|';
 cursor.className = 'cursor';
+cursor.textContent = '|';
 terminalOutput.appendChild(cursor);
 
-const commands = [
-    "Scanning network...",
-    "Collecting data...",
-    "Analyzing patterns...",
-    "Generating report...",
-    "Scan completed successfully!"
-];
-
-let commandIndex = 0;
-
-function typeCommand() {
-    if (commandIndex < commands.length) {
-        const command = commands[commandIndex];
-        let charIndex = 0;
-
-        const typingInterval = setInterval(() => {
-            if (charIndex < command.length) {
-                terminalOutput.innerHTML += command.charAt(charIndex);
-                charIndex++;
+function typeText(text, delay = 100) {
+    return new Promise(resolve => {
+        const chars = text.split('');
+        let i = 0;
+        const interval = setInterval(() => {
+            if (i < chars.length) {
+                terminalOutput.innerHTML += chars[i++];
             } else {
-                clearInterval(typingInterval);
-                setTimeout(() => {
-                    terminalOutput.innerHTML += '<br>';
-                    commandIndex++;
-                    typeCommand();
-                }, 1000);
+                clearInterval(interval);
+                resolve();
             }
-        }, 100);
-    } else {
-        cursor.style.display = 'none';
-    }
+        }, delay);
+    });
 }
 
-function updateDashboard() {
-    const dataElement = document.getElementById('data-visualization');
-    dataElement.innerHTML = Math.floor(Math.random() * 100) + '% of data processed';
+async function simulateTerminal() {
+    await typeText('Fetching OSINT data...\n');
+    await typeText('Data acquired: 12345 records found.\n', 50);
+    await typeText('Analyzing data...\n\n', 100);
+    await typeText('Threats detected: [XSS, SQL Injection, Phishing]\n', 50);
+    cursor.style.display = 'none';
 }
 
-setInterval(updateDashboard, 2000);
-typeCommand();
+simulateTerminal();
 
-// CSS for blinking cursor
-const style = document.createElement('style');
-style.innerHTML = `
-    .cursor {
-        animation: blink 1s step-end infinite;
-    }
-    @keyframes blink {
-        50% { opacity: 0; }
-    }
-`;
-document.head.appendChild(style);
+// Interactive element for data visualization
+const button = document.getElementById('updateDataBtn');
+const dataDisplay = document.getElementById('dataDisplay');
+
+button.addEventListener('click', () => {
+    const newData = Math.floor(Math.random() * 100);
+    dataDisplay.textContent = `Current Threat Level: ${newData}`;
+    dataDisplay.style.color = newData > 50 ? 'red' : 'green';
+});
+
+// Cursor blink effect
+setInterval(() => {
+    cursor.style.visibility = cursor.style.visibility === 'hidden' ? 'visible' : 'hidden';
+}, 500);
+```
+
+Make sure to include the necessary HTML structure for this JavaScript code to function correctly, such as elements with IDs `terminal`, `updateDataBtn`, and `dataDisplay`.
