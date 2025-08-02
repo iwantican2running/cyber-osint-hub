@@ -1,60 +1,63 @@
 import requests
-from urllib.parse import urlparse
 
 def get_http_headers(url):
     """
-    Fetches and returns the HTTP headers of a given URL.
-    
-    Args:
-    url (str): The URL to retrieve headers from.
-    
+    Fetch HTTP headers from a given URL.
+
+    Parameters:
+        url (str): The URL from which to fetch headers.
+
     Returns:
-    dict: A dictionary of HTTP headers.
+        dict: A dictionary of HTTP headers if the request is successful, None otherwise.
     """
     try:
-        response = requests.get(url, timeout=5)
+        response = requests.head(url, allow_redirects=True)
+        response.raise_for_status()  # Raises an error for bad responses (4xx or 5xx)
         return response.headers
-    except requests.exceptions.RequestException as e:
-        print(f"Error fetching headers: {e}")
+    except requests.RequestException as e:
+        print(f"Error fetching headers from {url}: {e}")
         return None
 
 def analyze_headers(headers):
     """
-    Analyzes HTTP headers and identifies potential security issues.
-    
-    Args:
-    headers (dict): The HTTP headers to analyze.
-    
+    Analyze and print key HTTP header information.
+
+    Parameters:
+        headers (dict): A dictionary of HTTP headers.
+
     Returns:
-    None
+        None
     """
-    security_headers = ['X-Content-Type-Options', 'X-Frame-Options', 'X-XSS-Protection', 'Strict-Transport-Security']
-    missing_headers = [header for header in security_headers if header not in headers]
+    if not headers:
+        print("No headers to analyze.")
+        return
+
+    print(f"Analyzing headers for {headers.get('Host', 'Unknown Host')}:")
+    print(f"Status Code: {headers.get('Status', 'N/A')}")
+    print(f"Content-Type: {headers.get('Content-Type', 'N/A')}")
+    print(f"Server: {headers.get('Server', 'N/A')}")
     
-    if missing_headers:
-        print(f"Missing security headers: {', '.join(missing_headers)}")
-    else:
-        print("All recommended security headers are present.")
+    # Check for security-related headers
+    security_headers = ['X-Content-Type-Options', 'X-Frame-Options', 'Content-Security-Policy', 'Strict-Transport-Security']
+    for header in security_headers:
+        value = headers.get(header)
+        if value:
+            print(f"{header}: {value}")
+        else:
+            print(f"{header}: Not present, consider adding for improved security.")
 
 def main():
-    # Input: URL to analyze
-    url = input("Enter the URL to analyze (e.g., https://example.com): ").strip()
+    """
+    Main function to execute the script functionality.
     
-    # Parse the URL to ensure it's valid
-    parsed_url = urlparse(url)
-    if not all([parsed_url.scheme, parsed_url.netloc]):
-        print("Invalid URL. Please include the scheme (http/https).")
-        return
+    Collects HTTP headers from a user-provided URL and analyzes them.
     
-    # Fetch and analyze HTTP headers
+    Returns:
+        None
+    """
+    url = input("Enter a URL (e.g., https://example.com): ")
     headers = get_http_headers(url)
-    if headers:
-        print("\nHTTP Headers:")
-        for header, value in headers.items():
-            print(f"{header}: {value}")
-        
-        print("\nSecurity Analysis:")
-        analyze_headers(headers)
+    analyze_headers(headers)
 
 if __name__ == "__main__":
     main()
