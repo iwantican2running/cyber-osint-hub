@@ -1,67 +1,49 @@
 /* Main container styling */
 #cyber-dashboard {
-    background-color: #121212;
-    color: #e0e0e0;
+    background-color: #1e1e2f;
+    color: #ffffff;
     font-family: 'Courier New', Courier, monospace;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     position: relative;
     overflow: hidden;
-}
-
-/* Data packets animation */
-@keyframes data-packet {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    50% {
-        transform: translateY(-20px);
-        opacity: 0.5;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-.data-packet {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background-color: #00ffcc;
-    border-radius: 50%;
-    animation: data-packet 1.5s infinite ease-in-out;
 }
 
 /* Pulsating activity indicator */
 .activity-indicator {
     width: 20px;
     height: 20px;
+    background: linear-gradient(45deg, #00ff99, #00ccff);
     border-radius: 50%;
-    background-color: #ff0055;
-    animation: pulsate 1.2s infinite alternate;
+    animation: pulse 1.5s infinite;
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
 
-@keyframes pulsate {
+@keyframes pulse {
     0% {
         transform: scale(1);
-        box-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
     }
     100% {
-        transform: scale(1.5);
-        box-shadow: 0 0 40px rgba(255, 0, 85, 0.7);
+        transform: scale(1);
+        opacity: 0.7;
     }
 }
 
 /* Typing effect in terminal */
 .typing-effect {
-    border-right: 2px solid #00ffcc;
+    font-size: 16px;
     white-space: nowrap;
     overflow: hidden;
-    width: 0;
-    animation: typing 4s steps(30, end) forwards, blink-caret 0.75s step-end infinite;
+    border-right: 2px solid #00ff99;
+    animation: typing 4s steps(30, end), blink-caret 0.75s step-end infinite;
 }
 
 @keyframes typing {
@@ -79,54 +61,84 @@
     }
 }
 
-/* Abstract network visualization with animated nodes and lines */
-.network-visualization {
-    position: relative;
-    width: 100%;
-    height: 100%;
-}
-
-.node {
-    position: absolute;
+/* Data packet animation */
+.data-packet {
     width: 10px;
     height: 10px;
-    background-color: #00ccff;
+    background-color: #ff007f;
+    position: absolute;
     border-radius: 50%;
-    animation: node-movement 5s infinite linear;
+    animation: moveDataPacket 5s linear infinite;
 }
 
-@keyframes node-movement {
+@keyframes moveDataPacket {
     0% {
         transform: translate(0, 0);
-    }
-    25% {
-        transform: translate(100px, -50px);
+        opacity: 1;
     }
     50% {
-        transform: translate(50px, 100px);
-    }
-    75% {
-        transform: translate(-50px, 50px);
+        transform: translate(100vw, 100vh);
+        opacity: 0.5;
     }
     100% {
         transform: translate(0, 0);
+        opacity: 1;
+    }
+}
+
+/* Network visualization */
+.network {
+    position: relative;
+}
+
+.node {
+    width: 12px;
+    height: 12px;
+    background-color: #00ccff;
+    border-radius: 50%;
+    position: absolute;
+    animation: nodeAnimation 3s ease-in-out infinite;
+}
+
+@keyframes nodeAnimation {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
     }
 }
 
 .line {
     position: absolute;
     width: 2px;
-    height: 100px;
-    background-color: rgba(0, 255, 255, 0.5);
-    animation: line-flow 3s infinite linear;
+    background-color: rgba(0, 204, 255, 0.5);
+    transform-origin: 0 0;
+    animation: lineAnimation 3s linear infinite;
 }
 
-@keyframes line-flow {
+@keyframes lineAnimation {
     0% {
-        height: 0;
+        transform: scaleX(0);
     }
     100% {
-        height: 100px;
+        transform: scaleX(1);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #cyber-dashboard {
+        padding: 10px;
+    }
+
+    .activity-indicator {
+        width: 15px;
+        height: 15px;
+    }
+
+    .typing-effect {
+        font-size: 14px;
     }
 }
 ```
