@@ -1,52 +1,33 @@
-/* Main Container Styles */
-#cyber-dashboard {
-    background-color: #1a1a1a;
-    color: #ffffff;
+/* General reset and body styling */
+body {
+    margin: 0;
     font-family: 'Courier New', Courier, monospace;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
-    position: relative;
+    background-color: #1e1e1e;
+    color: #00ffcc;
     overflow: hidden;
 }
 
-/* Data Packet Animation */
-@keyframes data-packet {
-    0% {
-        transform: translateX(-100%) scale(0);
-        opacity: 0;
-    }
-    50% {
-        transform: translateX(0) scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(100%) scale(0);
-        opacity: 0;
-    }
+/* Main container */
+#cyber-dashboard {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.data-packet {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 15px;
-    height: 15px;
-    background: linear-gradient(45deg, #00ffcc, #0077ff);
-    border-radius: 50%;
-    animation: data-packet 3s linear infinite;
-}
-
-/* Pulsating Activity Indicator */
-.pulsating-indicator {
+/* Pulsating activity indicator */
+.activity-indicator {
     width: 20px;
     height: 20px;
-    background-color: #ff007c;
     border-radius: 50%;
-    animation: pulsate 1s infinite;
+    background: linear-gradient(135deg, #00ffcc, #007f7f);
+    animation: pulse 1.5s infinite ease-in-out;
 }
 
-@keyframes pulsate {
+@keyframes pulse {
     0%, 100% {
         transform: scale(1);
         opacity: 0.7;
@@ -57,86 +38,100 @@
     }
 }
 
-/* Typing Effect */
-.terminal {
-    font-family: 'Courier New', Courier, monospace;
+/* Typing effect */
+.typing-effect {
+    font-size: 24px;
+    border-right: 4px solid #00ffcc;
     white-space: nowrap;
     overflow: hidden;
-    border-right: 3px solid #00ffcc;
-    width: 0;
-    animation: typing 5s steps(30, end) infinite;
+    animation: typing 4s steps(30, end), blink-caret 0.75s step-end infinite;
 }
 
 @keyframes typing {
-    0% {
+    from {
         width: 0;
     }
-    40% {
+    to {
         width: 100%;
-    }
-    60% {
-        width: 100%;
-    }
-    100% {
-        width: 0;
     }
 }
 
-/* Network Visualization */
+@keyframes blink-caret {
+    50% {
+        border-color: transparent;
+    }
+}
+
+/* Data packets animation */
+.data-packet {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #00ffcc;
+    border-radius: 3px;
+    animation: move-data-packet 5s linear infinite;
+}
+
+@keyframes move-data-packet {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+    25% {
+        transform: translateY(-200px) translateX(100px);
+    }
+    50% {
+        transform: translateY(-100px) translateX(-150px);
+    }
+    75% {
+        transform: translateY(100px) translateX(200px);
+    }
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+}
+
+/* Abstract network visualization */
 .network {
     position: relative;
     width: 100%;
-    height: 300px;
+    height: 100%;
     overflow: hidden;
 }
 
-.node {
+.network-node {
     position: absolute;
     width: 10px;
     height: 10px;
     background-color: #00ffcc;
     border-radius: 50%;
-    animation: node-move 2s linear infinite;
+    animation: node-float 5s infinite ease-in-out;
 }
 
-@keyframes node-move {
-    0% {
-        transform: translate(0, 0);
-    }
-    25% {
-        transform: translate(100px, 50px);
+@keyframes node-float {
+    0%, 100% {
+        transform: translateY(0);
     }
     50% {
-        transform: translate(50px, 100px);
-    }
-    75% {
-        transform: translate(0, 50px);
-    }
-    100% {
-        transform: translate(0, 0);
+        transform: translateY(-10px);
     }
 }
 
-.line {
+.network-line {
     position: absolute;
-    width: 2px;
-    background-color: #0077ff;
-    animation: line-draw 2s linear infinite;
+    height: 2px;
+    background-color: rgba(0, 255, 204, 0.5);
+    animation: draw-line 2s infinite ease-in-out;
 }
 
-@keyframes line-draw {
+@keyframes draw-line {
     0% {
-        height: 0;
+        transform: scaleX(0);
     }
     50% {
-        height: 100px;
+        transform: scaleX(1);
     }
     100% {
-        height: 0;
+        transform: scaleX(0);
     }
 }
-
-/* Adding a glowing effect to the main container */
-#cyber-dashboard {
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3);
-}
+```
