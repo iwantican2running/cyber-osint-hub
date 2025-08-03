@@ -1,144 +1,142 @@
-/* Main container styling */
+/* Main Container Styles */
 #cyber-dashboard {
-    background-color: #1e1e2f;
+    background-color: #1a1a1a;
     color: #ffffff;
     font-family: 'Courier New', Courier, monospace;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
     position: relative;
     overflow: hidden;
 }
 
-/* Pulsating activity indicator */
-.activity-indicator {
+/* Data Packet Animation */
+@keyframes data-packet {
+    0% {
+        transform: translateX(-100%) scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%) scale(0);
+        opacity: 0;
+    }
+}
+
+.data-packet {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    background: linear-gradient(45deg, #00ffcc, #0077ff);
+    border-radius: 50%;
+    animation: data-packet 3s linear infinite;
+}
+
+/* Pulsating Activity Indicator */
+.pulsating-indicator {
     width: 20px;
     height: 20px;
-    background: linear-gradient(45deg, #00ff99, #00ccff);
+    background-color: #ff007c;
     border-radius: 50%;
-    animation: pulse 1.5s infinite;
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    animation: pulsate 1s infinite;
 }
 
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-        opacity: 0.7;
-    }
-    50% {
-        transform: scale(1.2);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 0.7;
-    }
-}
-
-/* Typing effect in terminal */
-.typing-effect {
-    font-size: 16px;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 2px solid #00ff99;
-    animation: typing 4s steps(30, end), blink-caret 0.75s step-end infinite;
-}
-
-@keyframes typing {
-    from {
-        width: 0;
-    }
-    to {
-        width: 100%;
-    }
-}
-
-@keyframes blink-caret {
-    50% {
-        border-color: transparent;
-    }
-}
-
-/* Data packet animation */
-.data-packet {
-    width: 10px;
-    height: 10px;
-    background-color: #ff007f;
-    position: absolute;
-    border-radius: 50%;
-    animation: moveDataPacket 5s linear infinite;
-}
-
-@keyframes moveDataPacket {
-    0% {
-        transform: translate(0, 0);
-        opacity: 1;
-    }
-    50% {
-        transform: translate(100vw, 100vh);
-        opacity: 0.5;
-    }
-    100% {
-        transform: translate(0, 0);
-        opacity: 1;
-    }
-}
-
-/* Network visualization */
-.network {
-    position: relative;
-}
-
-.node {
-    width: 12px;
-    height: 12px;
-    background-color: #00ccff;
-    border-radius: 50%;
-    position: absolute;
-    animation: nodeAnimation 3s ease-in-out infinite;
-}
-
-@keyframes nodeAnimation {
+@keyframes pulsate {
     0%, 100% {
         transform: scale(1);
+        opacity: 0.7;
     }
     50% {
         transform: scale(1.5);
+        opacity: 1;
+    }
+}
+
+/* Typing Effect */
+.terminal {
+    font-family: 'Courier New', Courier, monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid #00ffcc;
+    width: 0;
+    animation: typing 5s steps(30, end) infinite;
+}
+
+@keyframes typing {
+    0% {
+        width: 0;
+    }
+    40% {
+        width: 100%;
+    }
+    60% {
+        width: 100%;
+    }
+    100% {
+        width: 0;
+    }
+}
+
+/* Network Visualization */
+.network {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+}
+
+.node {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #00ffcc;
+    border-radius: 50%;
+    animation: node-move 2s linear infinite;
+}
+
+@keyframes node-move {
+    0% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(100px, 50px);
+    }
+    50% {
+        transform: translate(50px, 100px);
+    }
+    75% {
+        transform: translate(0, 50px);
+    }
+    100% {
+        transform: translate(0, 0);
     }
 }
 
 .line {
     position: absolute;
     width: 2px;
-    background-color: rgba(0, 204, 255, 0.5);
-    transform-origin: 0 0;
-    animation: lineAnimation 3s linear infinite;
+    background-color: #0077ff;
+    animation: line-draw 2s linear infinite;
 }
 
-@keyframes lineAnimation {
+@keyframes line-draw {
     0% {
-        transform: scaleX(0);
+        height: 0;
+    }
+    50% {
+        height: 100px;
     }
     100% {
-        transform: scaleX(1);
+        height: 0;
     }
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    #cyber-dashboard {
-        padding: 10px;
-    }
-
-    .activity-indicator {
-        width: 15px;
-        height: 15px;
-    }
-
-    .typing-effect {
-        font-size: 14px;
-    }
+/* Adding a glowing effect to the main container */
+#cyber-dashboard {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3);
 }
-```
