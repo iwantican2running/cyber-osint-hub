@@ -3,57 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OSINT Cyber Dashboard</title>
+    <title>OSINT Cybersecurity Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
     <div id="cyber-dashboard">
         <header>
-            <h1>OSINT Cyber Dashboard</h1>
+            <h1>OSINT Cybersecurity Dashboard</h1>
         </header>
         
-        <section class="terminal">
+        <section id="terminal">
             <h2>Simulated Terminal</h2>
             <div class="terminal-output">
-                <pre>
-$ osint-tool --scan
-Scanning for vulnerabilities...
-[+] Found: 2 vulnerabilities
-[+] IP: 192.168.1.1
-[+] Port: 80
-                </pre>
-            </div>
-        </section>
-        
-        <section class="data-visualization">
-            <h2>Dynamic Data Visualization</h2>
-            <div class="chart">
-                <div class="bar" style="height: 70%;">70%</div>
-                <div class="bar" style="height: 50%;">50%</div>
-                <div class="bar" style="height: 90%;">90%</div>
-                <div class="bar" style="height: 30%;">30%</div>
+                <p>$ ls -l</p>
+                <p>drwxr-xr-x 2 user group 4096 Oct 10 12:00 data</p>
+                <p>drwxr-xr-x 2 user group 4096 Oct 10 12:00 reports</p>
+                <p>$ cat data/report.txt</p>
+                <p>Data analysis complete. Results: 75% success rate.</p>
             </div>
         </section>
 
-        <section class="network-map">
+        <section id="data-visualization">
+            <h2>Dynamic Data Visualizations</h2>
+            <div class="chart-container">
+                <div class="chart" id="chart1"></div>
+                <div class="chart" id="chart2"></div>
+            </div>
+        </section>
+
+        <section id="network-map">
             <h2>Network Map</h2>
-            <div class="node" style="top: 40%; left: 20%;">Node A</div>
-            <div class="node" style="top: 50%; left: 60%;">Node B</div>
-            <div class="node" style="top: 80%; left: 30%;">Node C</div>
-            <div class="link" style="top: 45%; left: 25%; width: 35%;"></div>
+            <div class="network-map">
+                <div class="node" id="node1">Node 1</div>
+                <div class="node" id="node2">Node 2</div>
+                <div class="node" id="node3">Node 3</div>
+                <div class="connection" id="conn1"></div>
+                <div class="connection" id="conn2"></div>
+            </div>
         </section>
 
-        <section class="encryption">
+        <section id="encryption-decryption">
             <h2>Encryption/Decryption Effects</h2>
-            <div class="cipher-text">
-                <p>Encrypted: <span class="encrypted">U2FsdGVkX1...</span></p>
-                <button onclick="decryptText()">Decrypt</button>
+            <div class="encryption-container">
+                <input type="text" id="inputText" placeholder="Enter text to encrypt" />
+                <button id="encryptBtn">Encrypt</button>
+                <div id="encryptedOutput" class="output"></div>
             </div>
         </section>
     </div>
 </body>
 </html>
-```
-
-Make sure you create the `style.css` and `script.js` files to style and add interactivity to your project according to your requirements.
