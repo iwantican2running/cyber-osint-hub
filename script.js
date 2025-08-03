@@ -1,46 +1,47 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const terminalOutput = document.getElementById('terminal');
-    const cursor = document.createElement('span');
-    cursor.className = 'cursor';
-    cursor.textContent = '|';
-    terminalOutput.appendChild(cursor);
-
+document.addEventListener("DOMContentLoaded", () => {
+    const terminal = document.querySelector("#terminal");
+    const cursor = document.createElement("span");
+    cursor.innerText = "|";
+    cursor.className = "cursor";
+    terminal.appendChild(cursor);
+    
     const commands = [
-        "Fetching OSINT data...",
-        "Analyzing network traffic...",
-        "Gathering public records...",
-        "Compiling results..."
+        "Initializing OSINT tools...",
+        "Gathering data from public sources...",
+        "Analyzing IP address...",
+        "Fetching user profiles...",
+        "Scanning for vulnerabilities..."
     ];
 
-    let commandIndex = 0;
+    let index = 0;
 
-    function simulateTerminalOutput() {
-        if (commandIndex < commands.length) {
-            const command = commands[commandIndex];
-            terminalOutput.innerHTML += `<div>${command}</div>`;
-            commandIndex++;
-            setTimeout(simulateTerminalOutput, 2000);
+    function typeCommand() {
+        if (index < commands.length) {
+            const commandText = commands[index];
+            terminal.innerHTML += `<div>${commandText}</div>`;
+            index++;
+            setTimeout(typeCommand, 2000);
         } else {
-            terminalOutput.innerHTML += "<div>Completed analysis. View results below:</div>";
-            updateDataVisualization();
+            cursor.style.display = 'none'; // Hide cursor when done
         }
     }
 
-    function updateDataVisualization() {
-        const visualization = document.getElementById('visualization');
-        visualization.innerHTML = "<div>Data updated at: " + new Date().toLocaleTimeString() + "</div>";
-        // Simulate dynamic updates
-        setInterval(() => {
-            visualization.innerHTML += "<div>New data point: " + Math.random().toFixed(2) + "</div>";
-        }, 3000);
+    function toggleCursor() {
+        cursor.style.visibility = (cursor.style.visibility === 'hidden') ? 'visible' : 'hidden';
     }
 
-    simulateTerminalOutput();
+    setInterval(toggleCursor, 500);
+    typeCommand();
 
-    // Blinking cursor animation
-    setInterval(() => {
-        cursor.style.visibility = (cursor.style.visibility === 'hidden' ? '' : 'hidden');
-    }, 500);
+    // Interactive element to simulate data update
+    const updateButton = document.createElement("button");
+    updateButton.innerText = "Update Dashboard";
+    updateButton.onclick = () => {
+        const newData = `Updated data at ${new Date().toLocaleTimeString()}`;
+        terminal.innerHTML += `<div>${newData}</div>`;
+    };
+    document.body.appendChild(updateButton);
 });
 ```
-Make sure to include appropriate HTML and CSS for the terminal output and visualization sections, as well as the blinking cursor effect.
+
+Make sure you have a corresponding HTML structure with an element having an ID of `terminal` for this script to function properly.
