@@ -3,52 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OSINT Cybersecurity Dashboard</title>
+    <title>OSINT Cyber Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 <body>
     <div id="cyber-dashboard">
         <header>
-            <h1>OSINT Cybersecurity Dashboard</h1>
+            <h1>OSINT Cyber Dashboard</h1>
+            <p>Explore the world of open-source intelligence</p>
         </header>
-        
+
         <section id="terminal">
             <h2>Simulated Terminal</h2>
             <div class="terminal-output">
-                <p>$ ls -l</p>
-                <p>drwxr-xr-x 2 user group 4096 Oct 10 12:00 data</p>
-                <p>drwxr-xr-x 2 user group 4096 Oct 10 12:00 reports</p>
-                <p>$ cat data/report.txt</p>
-                <p>Data analysis complete. Results: 75% success rate.</p>
+                <p>Welcome to the OSINT Terminal</p>
+                <p>Type 'help' for a list of commands.</p>
             </div>
+            <input type="text" class="terminal-input" placeholder="Enter command...">
         </section>
 
         <section id="data-visualization">
-            <h2>Dynamic Data Visualizations</h2>
-            <div class="chart-container">
-                <div class="chart" id="chart1"></div>
-                <div class="chart" id="chart2"></div>
+            <h2>Dynamic Data Visualization</h2>
+            <div class="chart">
+                <div class="bar" style="height: 70%; animation-delay: 0s;"></div>
+                <div class="bar" style="height: 50%; animation-delay: 0.1s;"></div>
+                <div class="bar" style="height: 90%; animation-delay: 0.2s;"></div>
+                <div class="bar" style="height: 30%; animation-delay: 0.3s;"></div>
+                <div class="bar" style="height: 80%; animation-delay: 0.4s;"></div>
             </div>
         </section>
 
         <section id="network-map">
             <h2>Network Map</h2>
-            <div class="network-map">
-                <div class="node" id="node1">Node 1</div>
-                <div class="node" id="node2">Node 2</div>
-                <div class="node" id="node3">Node 3</div>
-                <div class="connection" id="conn1"></div>
-                <div class="connection" id="conn2"></div>
+            <div class="network">
+                <div class="node" style="animation-delay: 0s;">Node 1</div>
+                <div class="node" style="animation-delay: 0.5s;">Node 2</div>
+                <div class="node" style="animation-delay: 1s;">Node 3</div>
+                <div class="node" style="animation-delay: 1.5s;">Node 4</div>
+                <div class="node" style="animation-delay: 2s;">Node 5</div>
             </div>
         </section>
 
-        <section id="encryption-decryption">
+        <section id="encryption">
             <h2>Encryption/Decryption Effects</h2>
-            <div class="encryption-container">
-                <input type="text" id="inputText" placeholder="Enter text to encrypt" />
-                <button id="encryptBtn">Encrypt</button>
-                <div id="encryptedOutput" class="output"></div>
+            <div class="encryption-demo">
+                <p class="encrypted">Encrypted Message: 5d41402abc4b2a76b9719d911017c592</p>
+                <button class="decrypt-btn">Decrypt</button>
+                <p class="decrypted hidden">Decrypted Message: hello</p>
             </div>
         </section>
     </div>
