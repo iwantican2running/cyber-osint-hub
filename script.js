@@ -1,59 +1,46 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const terminalOutput = document.getElementById("terminal-output");
-    const cursor = document.createElement("span");
-    cursor.className = "cursor";
-    cursor.innerText = "|";
-    terminalOutput.appendChild(cursor);
+const terminalOutput = document.getElementById('terminal-output');
+const cursor = document.getElementById('cursor');
+const dataVisual = document.getElementById('data-visual');
+const commands = ["Searching IP...", "Fetching data...", "Analyzing results...", "Completed!"];
+let commandIndex = 0;
 
-    const commands = [
-        "Initializing OSINT tools...\n",
-        "Scanning for public data...\n",
-        "Data retrieved: 3,510 records found.\n",
-        "Analyzing data...\n",
-        "Threats identified: 5\n",
-        "Report generated. Downloading...\n",
-    ];
+function blinkCursor() {
+    cursor.classList.toggle('blink');
+}
 
-    let index = 0;
-    function simulateTerminalOutput() {
-        if (index < commands.length) {
-            terminalOutput.innerText += commands[index];
-            index++;
-            setTimeout(simulateTerminalOutput, 1200);
-        } else {
-            cursor.style.display = "none";  // Hide cursor after output
-        }
+function typeCommand() {
+    if (commandIndex < commands.length) {
+        terminalOutput.innerHTML += `<div>${commands[commandIndex]}</div>`;
+        commandIndex++;
+        setTimeout(typeCommand, 2000);
+    } else {
+        updateVisual();
     }
+}
 
-    function blinkCursor() {
-        setInterval(() => {
-            cursor.style.visibility = cursor.style.visibility === "hidden" ? "visible" : "hidden";
-        }, 500);
-    }
+function updateVisual() {
+    const randomData = Math.floor(Math.random() * 100);
+    dataVisual.style.width = `${randomData}%`;
+    dataVisual.innerHTML = `${randomData}% Complete`;
+}
 
-    blinkCursor();
-    simulateTerminalOutput();
-    
-    // Interactive button to refresh data
-    const refreshButton = document.getElementById("refresh-button");
-    refreshButton.addEventListener("click", () => {
-        terminalOutput.innerText = "";
-        index = 0;
-        cursor.style.display = "inline"; // Show cursor again
-        simulateTerminalOutput();
-    });
+document.addEventListener('DOMContentLoaded', () => {
+    setInterval(blinkCursor, 500);
+    typeCommand();
 });
 ```
 
-### CSS (for cursor effect)
 ```css
-.cursor {
-    display: inline;
-    color: green;
+.blink {
+    animation: blink 1s step-end infinite;
 }
-``` 
 
-### HTML Example Structure
+@keyframes blink {
+    50% { opacity: 0; }
+}
+```
+
 ```html
 <div id="terminal-output"></div>
-<button id="refresh-button">Refresh Data</button>
+<div id="cursor">|</div>
+<div id="data-visual" style="width: 0; background: green; height: 20px;"></div>
